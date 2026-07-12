@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversario, Mi Amor 💖</title>
+    <style>
+        /* --- ESTILOS ULTRA LINDOS --- */
+        :root {
+            --color-principal: #ff4b72;
+            --color-secundario: #ff7597;
+            --color-fondo: #fff0f3;
+            --color-tarjeta: #ffffff;
+            --color-texto: #4a4a4a;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Corazones flotantes de fondo */
+        .corazon-flotante {
+            position: absolute;
+            color: rgba(255, 75, 114, 0.2);
+            font-size: 24px;
+            animation: flotar 6s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes flotar {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 20px 20px;
+            z-index: 1;
+        }
+
+        h1 {
+            color: var(--color-principal);
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+            animation: latido 1.5s infinite alternate;
+        }
+
+        @keyframes latido {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.03); }
+        }
+
+        .subtitulo {
+            font-size: 1.5rem;
+            color: var(--color-secundario);
+            font-style: italic;
+        }
+
+        .contenedor-principal {
+            max-width: 900px;
+            width: 90%;
+            z-index: 1;
+            margin-bottom: 60px;
+        }
+
+        .tarjeta {
+            background: var(--color-tarjeta);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(255, 75, 114, 0.1);
+            margin-bottom: 40px;
+            text-align: center;
+            border: 1px solid rgba(255, 75, 114, 0.2);
+        }
+
+        h2 {
+            color: var(--color-principal);
+            border-bottom: 2px inline solid var(--color-fondo);
+            padding-bottom: 10px;
+        }
+
+        /* Sección Frases de Te Amo */
+        .caja-frase {
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--color-principal);
+            background: #fff8f9;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--color-principal);
+        }
+
+        button {
+            background-color: var(--color-principal);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 75, 114, 0.3);
+        }
+
+        button:hover {
+            background-color: #e0365b;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 75, 114, 0.4);
+        }
+
+        /* Grid de las 100 razones */
+        .grid-razones {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ffe3e8;
+            border-radius: 15px;
+            background: #fffbfc;
+        }
+
+        .item-razon {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ffe3e8;
+            text-align: left;
+            font-size: 0.95rem;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .item-razon:hover {
+            transform: scale(1.02);
+            border-color: var(--color-secundario);
+            background: #fff8f9;
+        }
+
+        .numero-razon {
+            font-weight: bold;
+            color: var(--color-principal);
+            margin-right: 10px;
+            min-width: 25px;
+        }
+
+        /* Personalización de la barra de desplazamiento */
+        .grid-razones::-webkit-scrollbar { width: 8px; }
+        .grid-razones::-webkit-scrollbar-track { background: #fff0f3; border-radius: 10px; }
+        .grid-razones::-webkit-scrollbar-thumb { background: var(--color-secundario); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="contenedor-corazones"></div>
+
+    <header>
+        <h1>💖 ¡Feliz Aniversario sheyla,Mi Amor! 💖</h1>
+        <p class="subtitulo">Eres lo mejor que me ha pasado en la vida</p>
+    </header>
+
+    <div class="contenedor-principal">
+        
+        <div class="tarjeta">
+            <h2>📜 Un Mensaje del Corazón 📜</h2>
+            <p>Haz clic abajo para descubrir una razón más de cuánto te amo:</p>
+            <div class="caja-frase" id="cajaFrase">
+                "Te amo no solo por cómo eres, sino por cómo soy yo cuando estoy contigo."
+            </div>
+            <button onclick="cambiarFrase()">✨ Siguiente Frase Mágica ✨</button>
+        </div>
+
+        <div class="tarjeta">
+            <h2>🌹 100 Razones Por Las Que Te Amo 🌹</h2>
+            <p>Desliza hacia abajo para leer detalladamente cada pequeña gran cosa que amo de ti:</p>
+            
+            <div class="grid-razones" id="listaRazones">
+                </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- 1. GENERADOR DE CORAZONES DE FONDO ---
+        function crearCorazones() {
+            const contenedor = document.getElementById('contenedor-corazones');
+            for (let i = 0; i < 25; i++) {
+                const corazon = document.createElement('div');
+                corazon.classList.add('corazon-flotante');
+                corazon.innerText = '❤️';
+                corazon.style.left = Math.random() * 100 + 'vw';
+                corazon.style.animationDelay = Math.random() * 5 + 's';
+                corazon.style.fontSize = Math.random() * 20 + 15 + 'px';
+                contenedor.appendChild(corazon);
+            }
+        }
+        crearCorazones();
+
+        // --- 2. FRASES INTERACTIVAS ---
+        const frasesAmor = [
+            "Te amo más que a ayer, pero menos que a mañana. 💖",
+            "Eres mi lugar favorito en el mundo entero. 🌍",
+            "Mi felicidad tiene tu nombre grabado. 🥰",
+            "Si volviera a nacer, te elegiría una y mil veces más. 👩‍❤️‍👨",
+            "Cada momento a tu lado es un recuerdo perfecto. 📸",
+            "Eres el sueño del que nunca me quiero despertar. 💤",
+            "Tu sonrisa ilumina hasta mi día más oscuro. ☀️",
+            "Amarte es la decisión más fácil y hermosa que he tomado. ✨"
+        ];
+
+        function cambiarFrase() {
+            const caja = document.getElementById('cajaFrase');
+            const fraseAleatoria = frasesAmor[Math.floor(Math.random() * frasesAmor.length)];
+            caja.style.opacity = 0;
+            setTimeout(() => {
+                caja.innerText = `"${fraseAleatoria}"`;
+                caja.style.opacity = 1;
+            }, 200);
+        }
+
+        // --- 3. LAS 100 RAZONES (GENERADAS DINÁMICAMENTE) ---
+        // Aquí coloqué las bases, ¡puedes cambiar los textos por tus propios motivos reales!
+        const razones = [
+            "Por tu hermosa y contagiosa sonrisa.",
+            "Por la forma tan tierna en la que me miras.",
+            "Porque haces que los días difíciles sean mucho más ligeros.",
+            "Por tus abrazos que me hacen sentir completamente seguro/a.",
+            "Por tu paciencia infinita y tu gran corazón.",
+            "Porque compartimos el mismo sentido del humor.",
+            "Por cómo te preocupas por mí cuando no me siento bien.",
+            "Por los hermosos recuerdos que hemos construido juntos.",
+            "Por tu voz, que es mi sonido favorito en el mundo.",
+            "Porque me apoyas en cada uno de mis sueños y metas.",
+            "Por la forma que me amas es algo unico me tienes loco.",
+            "Por tu inteligencia y lo mucho que aprendo de ti.",
+            "Porque sabes exactamente cómo hacerme reír.",
+            "Por tus pequeños detalles inesperados.",
+            "Por la forma en que iluminas cualquier habitación al entrar.",
+            "Porque eres mi mejor amigo/a y mi gran amor.",
+            "Por tu aroma que se queda grabado en mi mente.",
+            "Porque respetas mis espacios y entiendes mis silencios.",
+            "Por cómo planificas el futuro pensando en los dos.",
+            "Por tu valentía y la fuerza con la que afrontas los retos.",
+            // Agregamos más de forma dinámica para completar las 100 de manera rápida y escalable
+        ];
+
+        // Rellenar automáticamente hasta tener 100 variaciones lindas
+        const complementos = [
+            "por tu forma de ver la vida.", "por hacerme sentir especial.", 
+            "por tu infinito cariño.", "por ser tú mismo/a siempre.", 
+            "por cómo cuidas de los detalles.", "por tus besos únicos.",
+            "por la magia de tus palabras.", "por ser mi gran refugio."
+        ];
+        
+        while(razones.length < 100) {
+            let base = razones[razones.length % razones.length];
+            let comp = complementos[Math.floor(Math.random() * complementos.length)];
+            razones.push(`Porque me enamoras cada segundo ${comp}`);
+        }
+
+        // Renderizar la lista en la pantalla
+        const contenedorRazones = document.getElementById('listaRazones');
+        razones.forEach((razon, index) => {
+            const item = document.createElement('div');
+            item.classList.add('item-razon');
+            
+            const numero = document.createElement('span');
+            numero.classList.add('numero-razon');
+            numero.innerText = `${index + 1}.`;
+            
+            const texto = document.createElement('span');
+            texto.innerText = razon;
+            
+            item.appendChild(numero);
+            item.appendChild(texto);
+            contenedorRazones.appendChild(item);
+        });
+    </script>
+</body>
+</html>
