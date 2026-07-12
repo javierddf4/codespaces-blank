@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Aniversario, Mi Amor 💖</title>
+    <title>Feliz Aniversario sheyla, Mi Amor 💖</title>
     <style>
         /* --- ESTILOS ULTRA LINDOS --- */
         :root {
@@ -124,6 +124,55 @@
             box-shadow: 0 8px 20px rgba(255, 75, 114, 0.4);
         }
 
+        /* --- ESTILOS DEL BUZÓN DE DESEOS --- */
+        .caja-buzon {
+            background: #fff8f9;
+            border: 2px dashed var(--color-secundario);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        textarea {
+            width: 90%;
+            height: 80px;
+            border: 1px solid #ffe3e8;
+            border-radius: 10px;
+            padding: 10px;
+            font-family: inherit;
+            resize: none;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: var(--color-principal);
+            box-shadow: 0 0 5px rgba(255, 75, 114, 0.2);
+        }
+
+        .lista-deseos {
+            margin-top: 20px;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .deseo-item {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 4px solid var(--color-secundario);
+            animation: aparecer 0.4s ease;
+            font-size: 0.95rem;
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Grid de las 100 razones */
         .grid-razones {
             display: grid;
@@ -163,9 +212,9 @@
         }
 
         /* Personalización de la barra de desplazamiento */
-        .grid-razones::-webkit-scrollbar { width: 8px; }
-        .grid-razones::-webkit-scrollbar-track { background: #fff0f3; border-radius: 10px; }
-        .grid-razones::-webkit-scrollbar-thumb { background: var(--color-secundario); border-radius: 10px; }
+        .grid-razones::-webkit-scrollbar, .lista-deseos::-webkit-scrollbar { width: 8px; }
+        .grid-razones::-webkit-scrollbar-track, .lista-deseos::-webkit-scrollbar-track { background: #fff0f3; border-radius: 10px; }
+        .grid-razones::-webkit-scrollbar-thumb, .lista-deseos::-webkit-scrollbar-thumb { background: var(--color-secundario); border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -173,8 +222,8 @@
     <div id="contenedor-corazones"></div>
 
     <header>
-        <h1>💖 ¡Feliz Aniversario sheyla,Mi Amor! 💖</h1>
-        <p class="subtitulo">Eres lo mejor que me ha pasado en la vida con cariño tu novio javi</p>
+        <h1>💖 ¡Feliz Aniversario, Mi Amor! 💖</h1>
+        <p class="subtitulo">Eres lo mejor que me ha pasado en la vida,con Amor tu novio javi</p>
     </header>
 
     <div class="contenedor-principal">
@@ -186,6 +235,17 @@
                 "Te amo no solo por cómo eres, sino por cómo soy yo cuando estoy contigo."
             </div>
             <button onclick="cambiarFrase()">✨ Siguiente Frase Mágica ✨</button>
+
+            <div class="caja-buzon">
+                <h3>✨ Buzón de los Deseos ✨</h3>
+                <p>Escribe aquí lo que más deseas o un sueño que quieras cumplir a mi lado:</p>
+                <textarea id="textoDeseo" placeholder="Quiero viajar a... / Deseo que siempre..."></textarea>
+                <br>
+                <button onclick="enviarDeseo()">💌 Enviar al Corazón 💌</button>
+                
+                <div class="lista-deseos" id="listaDeseos">
+                    </div>
+            </div>
         </div>
 
         <div class="tarjeta">
@@ -236,8 +296,7 @@
             }, 200);
         }
 
-        // --- 3. LAS 100 RAZONES (GENERADAS DINÁMICAMENTE) ---
-        // Aquí coloqué las bases, ¡puedes cambiar los textos por tus propios motivos reales!
+        // --- 3. TUS 20 RAZONES PERSONALIZADAS ---
         const razones = [
             "Por tu hermosa y contagiosa sonrisa.",
             "Por la forma tan tierna en la que me miras.",
@@ -255,28 +314,32 @@
             "Por tus pequeños detalles inesperados.",
             "Por la forma en que iluminas mi corazon:3.",
             "Porque eres mi mejor amigo/a y mi gran amor.",
-            "Porque siempre estas en mi pensamientos.",
+            "Porque siempre estas en mis pensamientos.",
             "Porque eres una persona unica y especial.",
             "Por cómo planificas el futuro pensando en los dos.",
-            "Por tu valentía y la fuerza con la que afrontas los retos.",
-            // Agregamos más de forma dinámica para completar las 100 de manera rápida y escalable
+            "Por tu valentía y la fuerza con la que afrontas los retos."
         ];
 
-        // Rellenar automáticamente hasta tener 100 variaciones lindas
+        // Rellenar automáticamente con frases dulces derivadas de tus razones hasta llegar a 100
         const complementos = [
-            "por tu forma de ver la vida.", "por hacerme sentir especial.", 
-            "por tu infinito cariño.", "por ser tú mismo/a siempre.", 
-            "por cómo cuidas de los detalles.", "por tus gran corazon llenar de ternura.",
-            "por la magia de tus palabras.", "por ser mi gran refugio."
+            "por hacerme el chico/a más feliz del planeta.", 
+            "por llenar mi vida de tanto amor incondicional.", 
+            "por cada momento hermoso que pasamos juntos.", 
+            "por tu forma tan bonita de cuidar nuestro amor.", 
+            "por ser mi paz en medio de cualquier tormenta.", 
+            "por tus detalles que me enamoran a diario.",
+            "por la hermosa magia de tu existencia.", 
+            "por ser mi confidente y mi refugio eterno."
         ];
         
+        let indiceBase = 0;
         while(razones.length < 100) {
-            let base = razones[razones.length % razones.length];
             let comp = complementos[Math.floor(Math.random() * complementos.length)];
-            razones.push(`Porque me enamoras cada segundo ${comp}`);
+            razones.push(`Porque me enamoras cada segundo y ${comp}`);
+            indiceBase++;
         }
 
-        // Renderizar la lista en la pantalla
+        // Renderizar las 100 razones finales en la cuadrícula
         const contenedorRazones = document.getElementById('listaRazones');
         razones.forEach((razon, index) => {
             const item = document.createElement('div');
@@ -293,6 +356,26 @@
             item.appendChild(texto);
             contenedorRazones.appendChild(item);
         });
+
+        // --- 4. LÓGICA DEL BUZÓN DE DESEOS ---
+        function enviarDeseo() {
+            const inputDeseo = document.getElementById('textoDeseo');
+            const contenedorLista = document.getElementById('listaDeseos');
+            
+            if (inputDeseo.value.trim() === "") {
+                alert("¡Escribe un deseo antes de enviar! 💖");
+                return;
+            }
+            
+            const nuevoDeseo = document.createElement('div');
+            nuevoDeseo.classList.add('deseo-item');
+            nuevoDeseo.innerHTML = `🌟 <strong>Deseo guardado:</strong> ${inputDeseo.value}`;
+            
+            contenedorLista.appendChild(nuevoDeseo);
+            inputDeseo.value = "";
+            
+            alert("¡Tu deseo ha sido enviado a mi corazón! 🥰✨");
+        }
     </script>
 </body>
 </html>
