@@ -20,21 +20,26 @@ body {
     position: relative;
 }
 
+/* --- ⚠️ AQUÍ ESTABA EL BUG DE INTERACCIÓN --- */
 .corazon-flotante {
     position: absolute;
     color: rgba(255, 75, 114, 0.25);
     font-size: 24px;
     animation: flotar 6s linear infinite;
     z-index: 0;
-    pointer-events: none;
+    pointer-events: none; /* Esto evita que bloquee los clics */
+    user-select: none;    /* Evita que se seleccione como texto */
 }
 
+/* Partículas al hacer clic */
 .click-corazon {
     position: absolute;
     color: var(--color-principal);
     font-size: 20px;
     pointer-events: none;
     z-index: 999;
+    --x: 0px; /* Variables por defecto para evitar errores */
+    --y: 0px;
     animation: explotarCorazon 0.8s ease-out forwards;
 }
 
@@ -57,8 +62,7 @@ header {
 
 h1 {
     color: var(--color-principal);
-    font-size: 4.5rem;
-    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
     margin-bottom: 10px;
     text-shadow: 2px 4px 10px rgba(255, 75, 114, 0.2);
     animation: latido 1.2s infinite alternate ease-in-out;
@@ -119,8 +123,7 @@ h1 {
 h2 {
     color: var(--color-principal);
     padding-bottom: 10px;
-    font-size: 2.5rem;
-    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
 }
 
 .caja-frase {
@@ -151,20 +154,11 @@ button {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(255, 75, 114, 0.3);
-    margin: 5px;
 }
 
 button:hover {
     transform: translateY(-3px) scale(1.03);
     box-shadow: 0 8px 25px rgba(255, 75, 114, 0.5);
-}
-
-.contenedor-cupones {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
 }
 
 .caja-buzon {
@@ -173,13 +167,6 @@ button:hover {
     border-radius: 18px;
     padding: 25px;
     margin-top: 35px;
-}
-
-h3 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2rem;
-    color: var(--color-principal);
-    margin-top: 0;
 }
 
 textarea {
@@ -261,6 +248,29 @@ textarea:focus {
     color: var(--color-principal);
     margin-right: 12px;
     min-width: 25px;
+}
+
+.reproductor-musica {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--gradient-romantico);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 75, 114, 0.4);
+    z-index: 1000;
+    transition: transform 0.3s;
+}
+
+.reproductor-musica:hover {
+    transform: scale(1.1);
 }
 
 .grid-razones::-webkit-scrollbar, .lista-deseos::-webkit-scrollbar { width: 8px; }
